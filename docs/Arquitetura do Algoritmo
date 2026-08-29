@@ -1,0 +1,97 @@
+                    ┌──────────────────────────┐
+                    │        USUÁRIO           │
+                    │ "Monte meu PC com R$4500"│
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │       FRONTEND / UI       │
+                    │  Interface do PC Builder  │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │    BotOrchestrator.ts     │
+                    │                          │
+                    │ • interpreta orçamento   │
+                    │ • seleciona componentes  │
+                    │ • calcula score          │
+                    │ • escolhe configuração   │
+                    └──────┬─────────┬─────────┘
+                           │         │
+             ┌─────────────┘         └──────────────┐
+             ▼                                      ▼
+┌──────────────────────────┐          ┌──────────────────────────┐
+│ COMPONENT_DATABASE       │          │ CompatibilityService     │
+│                          │          │                          │
+│ CPU                      │          │ • Socket                 │
+│ GPU                      │          │ • RAM                    │
+│ Motherboard              │          │ • Fonte                  │
+│ RAM                      │          │ • Gabinete               │
+│ Storage                  │          │ • Compatibilidade geral  │
+│ PSU                      │          └────────────┬─────────────┘
+│ Case                     │                       │
+└────────────┬─────────────┘                       │
+             │                                     │
+             ▼                                     │
+┌──────────────────────────┐                       │
+│      COMBINAÇÕES         │                       │
+│                          │                       │
+│ CPU + GPU + placa-mãe    │                       │
+│ + RAM + SSD + PSU + Case │                       │
+└────────────┬─────────────┘                       │
+             │                                     │
+             ▼                                     │
+┌──────────────────────────┐                       │
+│       scoreBuild()       │◄──────────────────────┘
+│                          │
+│ • aproveitamento         │
+│   do orçamento           │
+│ • prioridade GPU         │
+│ • CPU/GPU                │
+│ • RAM                    │
+│ • SSD                    │
+│ • fonte                  │
+│ • faixa da GPU           │
+│ • equilíbrio             │
+└────────────┬─────────────┘
+             │
+             ▼
+┌──────────────────────────┐
+│      MELHOR BUILD        │
+│                          │
+│ bestBuild                │
+│ bestScore                │
+└────────────┬─────────────┘
+             │
+             ├──────────────────────┐
+             ▼                      ▼
+┌──────────────────────────┐ ┌──────────────────────────┐
+│    FinanceService        │ │   CompatibilityService   │
+│                          │ │                          │
+│ • soma componentes       │ │ • valida configuração   │
+│ • totalCost              │ │ • retorna relatório     │
+│ • difference             │ │                          │
+│ • isOverBudget           │ └────────────┬─────────────┘
+└────────────┬─────────────┘              │
+             │                            │
+             └──────────────┬─────────────┘
+                            ▼
+                 ┌──────────────────────────┐
+                 │     BotResponsePayload   │
+                 │                          │
+                 │ • text                   │
+                 │ • build                  │
+                 │ • finance                │
+                 │ • compatibility          │
+                 └────────────┬─────────────┘
+                              │
+                              ▼
+                    ┌──────────────────────────┐
+                    │       INTERFACE           │
+                    │                           │
+                    │ Configuração sugerida     │
+                    │ Total                     │
+                    │ Orçamento                 │
+                    │ Compatibilidade           │
+                    └───────────────────────────┘
